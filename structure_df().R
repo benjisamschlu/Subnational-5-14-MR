@@ -9,7 +9,7 @@
 
 # Function: structure data frame ----------------------------------------------------------------------------------------------------------------------------
 
-structure_df <- function(data) {
+structure_df <- function(data, yearly = FALSE) {
         
         df <- data.frame(death = data[["b5"]] == 0,
                          dob = data[["b3"]] + runif(nrow(data), min = 0, max = 1 ), # add a random date within the month depending on age at death
@@ -38,6 +38,10 @@ structure_df <- function(data) {
         
         df <- df[df$dob < df$intv, ] # drop children born after first interview date (min(v008))
         df$child_id <- rep(1:nrow(df))
+        
+        if (yearly == TRUE) {
+                df[, c("dob", "intv", "dod")] <- floor( (df[, c("dob", "intv", "dod")]/12)+1900 ) # floor to get the year in which birth, interview and death happen
+                }
         
         # checks:
         stopifnot(nrow(df[df$death == TRUE & is.na(df$dod), ]) == 0) # every dead child has a dod ?
