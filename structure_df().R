@@ -5,11 +5,16 @@
 # 2) Rounding of random number generated for dates ? --> does not really play a role
 # 3) Replication for generation of random numbers (set.seed()) ?
 # 4) When all region are not present, it creates issues: SOLVED --> with [unique()] 
+# 5)
 
 
 # Function: structure data frame ----------------------------------------------------------------------------------------------------------------------------
 
-structure_df <- function(data, yearly = FALSE) {
+# Arguments:  
+# yearly: convert cmc into calendar year?  
+# trunc: number of year for follow up
+
+structure_df <- function(data, yearly = FALSE, trunc = 12) {
         
         df <- data.frame(death = data[["b5"]] == 0,
                          dob = data[["b3"]] + runif(nrow(data), min = 0, max = 1 ), # add a random date within the month depending on age at death
@@ -41,7 +46,10 @@ structure_df <- function(data, yearly = FALSE) {
         
         if (yearly == TRUE) {
                 df[, c("dob", "intv", "dod")] <- floor( (df[, c("dob", "intv", "dod")]/12)+1900 ) # floor to get the year in which birth, interview and death happen
-                }
+        }
+        
+        df$trunc <- df$intv - trunc # defines truncation date 
+        
         
         # checks:
         stopifnot(nrow(df[df$death == TRUE & is.na(df$dod), ]) == 0) # every dead child has a dod ?
