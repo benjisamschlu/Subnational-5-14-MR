@@ -148,9 +148,10 @@ dhs_to_childmonth <- function(ctry.id, u5mr = TRUE, period.length = 5, nber.peri
                 
                 for (i in seq_along(data)) { # convert each data set of the list to child-month 
                         
+                        srvyear = 1900 + floor(range(data[[i]]$v008)[2]/12) # get date of last interview
+                        
                         if (multi.survey == FALSE) { # when working with only one survey, time range change for each dhs
                                 
-                                srvyear = 1900 + floor(range(data[[i]]$v008)[2]/12) # get date of last interview
                                 upper_y = srvyear # defines highest year for year.cut 
                                 lower_y = upper_y - (nber.period*period.length) # defines lowest year for year.cut
                                 y_cut = seq(lower_y, upper_y, by = period.length)
