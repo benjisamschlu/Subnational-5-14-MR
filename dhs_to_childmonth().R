@@ -8,6 +8,10 @@
 #        loc.cluster.rm.na allows to remove cluster that have incorrect location
 #        mutli.survey useful when merging all direct estimates --> need common time variable
 
+#       Modify the function such that even when not dropping the missing clusters, admin 2 info is kept. 
+#       Carefull that it does not add missing info since some admin 1 are missing for cluster, are they
+#       also missing in fbh data?
+
 # BLOCK TO LOAD AVAILABLE DHS DATA OF A GIVEN COUNTRY
 
 dhs_to_childmonth <- function(ctry.id, u5mr = TRUE, period.length = 5, nber.period = 3, child_month = TRUE, loc.cluster.rm.na = TRUE,
@@ -38,14 +42,11 @@ dhs_to_childmonth <- function(ctry.id, u5mr = TRUE, period.length = 5, nber.peri
         # BLOCK TO LOCATE CLUSTERS IN ADMIN 1/2 AND EXCLUDE CLUSTERS WITHOUT LOCATION
         # Not compulsory step because region variable is already available in fbh data --> of interest if cluster-model
         
-        geo <- vector("list", length(dhs)) # container for geo objects of each dhs
-        Amat <- vector("list", length(dhs)) # container for adjacency matrix
-        
-        if ( file.exists( paste("./data/shapefiles", dhs[i], "shps/sdr_subnational_boundaries2.shp", sep = "/")) ) {
-                geo0 <- vector("list", length(dhs)) # container for geo objects of each dhs
-                Amat0 <- vector("list", length(dhs)) # container for adjacency matrix 
-        }
-        
+        geo <- vector("list", length(dhs)) # container for geo objects of each dhs (admin 1)
+        Amat <- vector("list", length(dhs)) # container for adjacency matrix (admin 1)
+        geo0 <- vector("list", length(dhs)) # container for geo objects of each dhs (admin 2)
+        Amat0 <- vector("list", length(dhs)) # container for adjacency matrix (admin 2)
+                
         for (i in seq_along(dhs)) { # store the different gps cluster data name available for the country
                 
                 gpsfilename <- dir(path = paste("./data/gps cluster", dhs[i], sep = "/"), pattern = ".shp$") # get file names
@@ -197,10 +198,7 @@ dhs_to_childmonth <- function(ctry.id, u5mr = TRUE, period.length = 5, nber.peri
         names(data) <- dhs
         
         # Output
-        if (loc.cluster.rm.na == TRUE) {
-                list("dhs" = dhs, "childmonth" = data, "geo" = geo, "geo0" = geo0, "Amat" = Amat, "Amat0" = Amat0)
-        }
-        else {
-                list("dhs" = dhs, "childmonth" = data, "geo" = geo, "Amat" = Amat)
-                }
+        list("dhs" = dhs, "childmonth" = data, "geo" = geo, "geo0" = geo0, "Amat" = Amat, "Amat0" = Amat0)
+        
+       
 }
