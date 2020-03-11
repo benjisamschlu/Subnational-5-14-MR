@@ -12,6 +12,9 @@
 
 prop.children_by_region <- function(data, breaks, index, survey.id, length.p = 4, u5 = TRUE) { # improve if feasible
         
+        # print("Verify that regions are in the same order as REGNAME from geo:")
+        # print(levels(data[, "region"]))
+       
         if (u5 == TRUE) {
                 data %>%
                         filter( ((alive == "yes" | alive == "Yes") & -length.p <= (breaks[index]-dob) & (breaks[index]-dob) < 5) | # alive & born 5 years before survey to upper date of period
@@ -20,7 +23,8 @@ prop.children_by_region <- function(data, breaks, index, survey.id, length.p = 4
                         summarise(prop = sum(weights)) %>%
                         mutate(prop = prop/sum(prop)*100,
                                period = paste(breaks[index], as.numeric(breaks[index+1])-1, sep = "-"), # get the period
-                               survey = survey.id) # get the name of the survey used
+                               survey = survey.id, # get the name of the survey used
+                               region = factor(region, labels = geo$REGNAME)) # set the region names as Amat of last DHS
                 
         }
         else {
@@ -31,10 +35,10 @@ prop.children_by_region <- function(data, breaks, index, survey.id, length.p = 4
                         summarise(prop = sum(weights)) %>%
                         mutate(prop = prop/sum(prop)*100,
                                period = paste(breaks[index], as.numeric(breaks[index+1])-1, sep = "-"), # get the period
-                               survey = survey.id) # get the name of the survey used  
+                               survey = survey.id, # get the name of the survey used
+                               region = factor(region, labels = geo$REGNAME)) # set the region names as Amat of last DHS
                 
         }
-        
         
 }
 

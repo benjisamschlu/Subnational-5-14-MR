@@ -38,6 +38,6 @@ childmonth <- function(u5mr = FALSE, ...) { # arguments are directly passed to p
         print(geo$REGNAME) # could be an argument of the function. For now, check in global environment
         print(lapply(data, function(x) levels(x$region))) # 
         data <- lapply(data, function(x) { x$region <- factor(x$region, labels = geo$REGNAME); x } )
-        data <- lapply(data, function(x) { levels(x$time) <- gsub("^|\\d{1}(\\d{2})(\\-)|\\d{1}(\\d{2})", "\\1\\2\\3", levels(x$time)); x } ) # transform three digits data into two
+        data <- lapply(data, function(x) { levels(x$time) <- gsub("^|\\d{1}(\\d{2})(\\-)|\\d{1}(\\d{2})", "\\1\\2\\3", levels(x$time)); x } ) # transform three digits date into two
         data
 }
