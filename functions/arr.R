@@ -6,7 +6,7 @@
 # Date: 11/3/2020
 
 # Notes:
-# 1) # This function will be used within mapply to loop on regions, 
+# 1) # This function will be used within lapply to loop on regions, 
 #      and whitin the function, it loops on the periods through 
 #      p.id
 
@@ -22,7 +22,7 @@ arr <- function(data, region, age) {
                                   ">= 2010"))
         
         iteration <- head(as.list(df$p.id), -1) # set the number of iteration -1 (ratio of f(t+1)/f(t))
-        ARR <- unlist( lapply(iteration, function(x) { log(df$mean[df$p.id == x+1]/df$mean[df$p.id == x]) /  (df$p.mid[df$p.id == x] - df$p.mid[df$p.id == x+1])} ) ) # compute ARR looping on periods
+        ARR <- unlist( lapply(iteration, function(x) { (log(df$mean[df$p.id == x+1]/df$mean[df$p.id == x]) /  (df$p.mid[df$p.id == x] - df$p.mid[df$p.id == x+1]))*100} ) ) # compute ARR looping on periods
         period <- unlist (lapply(iteration, function(x) df$years[df$p.id == x+1]) )  # get period associated to ARR (t+1)
         label <- unlist (lapply(iteration, function(x) df$p.lab[df$p.id == x+1]) )  # get label associated to ARR (t+1)
         return(data.frame(arr = ARR, period = period, p.lab = label, region = region, age = age)) 
