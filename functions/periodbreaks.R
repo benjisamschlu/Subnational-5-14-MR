@@ -14,7 +14,7 @@
 periodbreaks <- function(data, nber.p = 4, length.p = 4, amount.info = 1) {
         
         enddate_DHS <- 1900 + max(data[[last_DHS]][,"v008"])/12 # last interview date
-        upper <- ifelse(abs(enddate_DHS - floor(enddate_DHS)) == 0, enddate_DHS, # if enddate_DHS after September (3/4 of a year) use it as highest year
+        upper <- ifelse(abs(enddate_DHS - floor(enddate_DHS)) == 0, floor(enddate_DHS), # if enddate_DHS after September (3/4 of a year) use it as highest year
                         ifelse(abs(enddate_DHS - floor(enddate_DHS)) >= 0.75, floor(enddate_DHS) + 1,
                                floor(enddate_DHS)))
         lower <- upper - (10*length.p) # defines lowest year for year.cut
