@@ -3,6 +3,7 @@
 Benjamin-Samuel Schlüter, Bruno Masquelier, December 2020
 
 Paper under review with PLOS ONE scientific journal
+Data section of README has to be finished
 
 ## Purpose:
 
@@ -17,23 +18,14 @@ where you have to set your R working directory and which will
 be divided into subdirectories named:
 
     /code
-
         /functions
-
     /data
-
 	/fbh
-
 	/gps cluster
-
 	/shapefiles
-
 	/HIV_Adjustments
-
 	/auxiliary
-
 	/tidy
-
     /richardli_github
 
 The repository available on Github where this README stands is */code*.
@@ -44,6 +36,11 @@ Make sure to exactly reproduce this structure on your laptop before running the 
 
 ## Data
 
+The analysis includes 96 [DHS](https://dhsprogram.com/) surveys. Each country has a certain number of DHS 
+surveys, see the list below. For some countries we needed to select a shapefile in order to relocate cluster 
+within coherent sub-national areas over time. To do so we also needed GPS cluster location of certain DHS surveys.
+Data associated to a given DHS survey is always in *fbh* for Full-Birth History data, one shapefile per country 
+will be present in */shapefiles* and if required some cluster GPS locations data in */gps cluster*. 
 
 
 ## R scripts
