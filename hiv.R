@@ -45,9 +45,9 @@ adj_lookup <- function(y, per, adj){
         per <- as.character(per) 
         
         
-        if (ctry %in% c("Malawi", "Zimbabwe")) { # CHANGE BECAUSE I HAVE MULTIPLE TIME PERIODS
-                labels <- c("84-87", "88-91", "92-95", "96-99", "00-03", "04-07", "08-11", "12-15")
-                t0 <- 1984 # ADDED FOR "start <-... " BELOW
+        if (ctry %in% c("Malawi", "Zimbabwe", "Tanzania")) { # CHANGE BECAUSE I HAVE MULTIPLE TIME PERIODS
+                labels <- c("80-83", "84-87", "88-91", "92-95", "96-99", "00-03", "04-07", "08-11", "12-15")
+                t0 <- 1980 # ADDED FOR "start <-... " BELOW
                 t1 <- 2012
                         
         }
@@ -56,9 +56,9 @@ adj_lookup <- function(y, per, adj){
                 t0 <- 1990
                 t1 <- 2014
         }
-        else if (ctry %in% c("Kenya", "Rwanda")) {
-                labels <- c("91-94", "95-98", "99-02", "03-06", "07-10", "11-14", "15-18")
-                t0 <- 1991
+        else if (ctry %in% c("Kenya", "Rwanda", "Lesotho", "Zambia")) {
+                labels <- c("83-86", "87-90", "91-94", "95-98", "99-02", "03-06", "07-10", "11-14", "15-18")
+                t0 <- 1983
                 t1 <- 2015
         }
         
@@ -105,7 +105,7 @@ adjust.meta <- function(d, adj, year){
         return(d)
 }
 
-country.hiv <- c("Malawi", "Rwanda", "Namibia")
+country.hiv <- c("Malawi", "Rwanda", "Namibia", "Lesotho", "Mozambique")
 region.hiv <- c("Zimbabwe", "Kenya")
 if(ctry %in% country.hiv){
         data.nohiv <- data

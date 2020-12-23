@@ -39,20 +39,10 @@ childmonth <- function(u5mr = FALSE, ...) { # arguments are directly passed to p
         }
         print("Verify that regions are in the same order as REGNAME from geo:")
         print(geo$REGNAME) # could be an argument of the function. For now, check in global environment
-        print(lapply(data, function(x) levels(x$region))) 
+        print(lapply(data, function(x) levels(x$region)))
+        # transform date into 2 digits - 2 digits
+        data <- lapply(data, function(x) { levels(x$time) <- gsub("^|\\d{1}(\\d{2})(\\-)|\\d{1}(\\d{2})", "\\1\\2\\3", levels(x$time)); x } ) # transform three digits date into two
         
-        continue <- same_order() # visually check if regions order is the same. If it is, use last DHS region name. If not, do it manually.
-        if (continue == TRUE) {
-                
-                data <- lapply(data, function(x) { x$region <- factor(x$region, labels = geo$REGNAME); x } )
-                data <- lapply(data, function(x) { levels(x$time) <- gsub("^|\\d{1}(\\d{2})(\\-)|\\d{1}(\\d{2})", "\\1\\2\\3", levels(x$time)); x } ) # transform three digits date into two
-                data
-        }
-        else {
-                print("Do it manually")
-                data <- lapply(data, function(x) { levels(x$time) <- gsub("^|\\d{1}(\\d{2})(\\-)|\\d{1}(\\d{2})", "\\1\\2\\3", levels(x$time)); x } ) # transform three digits date into two
-                data
-                }
         
 
 }

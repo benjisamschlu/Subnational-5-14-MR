@@ -1,48 +1,49 @@
-########################################################################################################################################################
-# PROJECT: Comparison of 10q5 to 5q0 at a subnational scale
 
-# Aim of code: Obtain estimates of 5q0 and 10q5
 
-# Code constructed by: Benjamin-Samuel Schlüter
-# Date of last revision: 4-3-2020
 
+#######################################################################################
+##      PROJECT: Space-time smoothing of 5-14 mortality estimates in SSA
+##      -- by Benjamin-Samuel Schlüter --
+##      UCLouvain
+##      Dec. 2020
+#######################################################################################
+#
+#       Obtain direct sub-national estimates of 5q0 and 10q5 with getDirectList()
+#       Perform a meta-analysis with aggregateSurvey() to pool info across multiple DHS
+#       Perform the space-time smoothing with fitINLA
+#       Perform variance decomposition
+#
+#######################################################################################
+#
+#
 # Notes:
 # 1) 
 
 ########################################################################################################################################################
 
 
-#--- Load packages ----------------------------------------------------------------------------------------------------------------------
 
-packages <- c("SUMMER", "ggplot2", "gridExtra", "rdhs", "rgdal", "readstata13", "dplyr", "demogsurv", "sp")
-invisible( lapply(packages, library, character.only = TRUE) )
-
-
-#--- Load functions ----------------------------------------------------------------------------------------------------------------------
-
-source("./code/functions/getSmooth2.R")
-source("./code/functions/create_df.R")
-
-
-#--- Horvitz-Thompson estimates ------------------------------------------------------------------------------------------------------------
+# ----- Horvitz-Thompson estimate step ------------------------------------------------------------------------------------------------------------
 
 # merge all period into one vector using period from 5-15
 years <- unique(unlist(lapply(data_a5, function(x) {gsub("^|\\d{1}(\\d{2})(\\-)|\\d{1}(\\d{2})", "\\1\\2\\3", levels(x[, "time"]))})))
-data_u5 <- lapply(data_u5, function(x) x[x$time %in% years, ]) # remove oldest periods not covered by 5-15
-
-data.multi_u5 <- getDirectList(births = data_u5, years = years, regionVar = "region",  timeVar = "time", # years have to be matching in all child-month data
+# remove oldest periods not covered by 5-15
+data_u5 <- lapply(data_u5, function(x) x[x$time %in% years, ]) 
+# years have to be matching in all child-month data
+data.multi_u5 <- getDirectList(births = data_u5, years = years, regionVar = "region",  timeVar = "time", 
                                clusterVar = "~clustid + id", ageVar = "age", weightsVar = "weights", geo.recode = NULL)
 
 data.multi_a5 <- getDirectList(births = data_a5, years = years, regionVar = "region",  timeVar = "time", 
                                clusterVar = "~clustid + id", ageVar = "age", weightsVar = "weights", geo.recode = NULL)
 
-#--- Meta-analysis ----------------------------------------------------------------------------------------------------------
+
+# ----- Meta-analysis step ----------------------------------------------------------------------------------------------------------
 
 # Combine estimates from different surveys into a single estimate using 
-# weighted average and weights given by inverse of their variances
+# weighted average and weights are given by inverse of their variance
 
-# HIV correction for 4 countries
-if (ctry %in% c("Malawi", "Namibia", "Kenya", "Rwanda", "Zimbabwe")) {
+# HIV correction for some countries using Li et al. (2019) code
+if (ctry %in% c("Malawi", "Namibia", "Kenya", "Rwanda", "Zimbabwe", "Lesotho", "Zambia", "Tanzania")) {
         
         source("./code/hiv.R", echo = TRUE)
         est_u5 <- rbind(data, data.national)
@@ -53,16 +54,15 @@ if (ctry %in% c("Malawi", "Namibia", "Kenya", "Rwanda", "Zimbabwe")) {
 est_a5 <- aggregateSurvey(data.multi_a5)
 
 
-#--- Space-time model ------------------------------------------------------------------------------------------------------------------------
+# ----- Space-time model ------------------------------------------------------------------------------------------------------------------------
 
 # National
+
 fit_u5 <- fitINLA(data = est_u5, geo = NULL, Amat = NULL, year_label = years, 
                   rw = 2, is.yearly = FALSE) 
 fit_a5 <- fitINLA(data = est_a5, geo = NULL, Amat = NULL, year_label = years, 
                   rw = 2, is.yearly = FALSE) 
-# getSmooth2 is an own defined variation of getSmooth().
-# It stores the simulation as a list in order to 
-# obtain uncertainty around inequality measures.
+
 out_u5 <- getSmooth2(fit_u5, year_label = years)
 sim_u5 <- out_u5[["sim"]]
 out_u5 <- out_u5[["outputs"]]
@@ -71,11 +71,11 @@ out_a5 <- getSmooth2(fit_a5, year_label = years)
 sim_a5 <- out_a5[["sim"]]
 out_a5 <- out_a5[["outputs"]]
 
-
-
 # Subnational 
+
+# arg. hyper=gamma to obtain region.unst term
 fit.sub_u5 <- fitINLA(data = est_u5, geo = geo, Amat = Amat, year_label = years, 
-                      rw = 2, is.yearly = FALSE, type.st = 4, hyper = "gamma") # just added gamma to obtain region.unst
+                      rw = 2, is.yearly = FALSE, type.st = 4, hyper = "gamma") 
 fit.sub_a5 <- fitINLA(data = est_a5, geo = geo, Amat = Amat, year_label = years, 
                       rw = 2, is.yearly = FALSE, type.st = 4, hyper = "gamma")
 
@@ -88,22 +88,22 @@ sim.sub_a5 <- out.sub_a5[["sim"]]
 out.sub_a5 <- out.sub_a5[["outputs"]]
 
 
-#--- Create data sets for outputs --------------------------------------------------------------------------------------------------------
+# ----- Create data sets for outputs --------------------------------------------------------------------------------------------------------
 
 u5 <- create_df(meta.est = est_u5, st.est_nat = out_u5, st.est_subnat = out.sub_u5)
 a5 <- create_df(meta.est = est_a5, st.est_nat = out_a5, st.est_subnat = out.sub_a5)
 
 
-#--- Variance decomposition --------------------------------------------------------------------------------------------------------------
-
-library("INLA")
+# ----- Variance decomposition --------------------------------------------------------------------------------------------------------------
 
 periods <- years
 n.periods <- length(years)
 n.area <- length(levels(data_a5[[3]][, "region"]))
 n.periods.area <- n.area*n.periods
 
+
 # U5
+
 marg.icar <- matrix(NA, nrow = n.area, ncol = 100000)
 icars <- fit.sub_u5$fit$marginals.random$region.struct
 for(i in 1:n.area){
@@ -148,7 +148,9 @@ var.utimeregions <- median(apply(marg, 2, var))
 all.vars_u5 <- c(var.rw, var.icar, var.utimes, var.uregions, var.utimeregions)
 prop_u5 <- all.vars_u5/sum(all.vars_u5)*100
 
+
 # A5
+
 marg.icar <- matrix(NA, nrow = n.area, ncol = 100000)
 icars <- fit.sub_a5$fit$marginals.random$region.struct
 for(i in 1:n.area){
@@ -189,12 +191,11 @@ for(i in 1:n.periods.area){
 }
 var.utimeregions <- median(apply(marg, 2, var))
 
-
+# Compute proportion of variation explained by each component
 all.vars_a5 <- c(var.rw, var.icar, var.utimes, var.uregions, var.utimeregions)
 prop_a5 <- all.vars_a5/sum(all.vars_a5)*100
 
-
-
+# Create the data.frame with proportion variance explained for each component and age group
 names <- c("RW2", "ICAR", "time.unstruct", "region.unstruct", "time.area")
 variance <- data.frame(
         Median = c(all.vars_u5, all.vars_a5),
