@@ -15,25 +15,26 @@ aged 5-14 for 20 countries in Sub-Saharan Africa.
 There should be a single parent directory on your file system,
 where you have to set your R working directory and which will
 be divided into subdirectories named:
-    */code*
 
-        */functions*
+    /code
 
-    */data* 
+        /functions
 
-	*/fbh*
+    /data
 
-	*/gps cluster*
+	/fbh
 
-	*/shapefiles*
+	/gps cluster
 
-	*/HIV_Adjustments*
+	/shapefiles
 
-	*/auxiliary*
+	/HIV_Adjustments
 
-	*/tidy*
+	/auxiliary
 
-    */richardli_github*
+	/tidy
+
+    /richardli_github
 
 The repository available on Github where this README stands is */code*.
 In order to obtain */richardli_github* subdirectory, go [here](https://github.com/richardli/AfricaU5MR),
