@@ -10,45 +10,49 @@ Data section of README has to be finished
 
 This file and all the other files in the repository should enable
 you to reproduce our results, plots, tables, ... from our joint
-paper on the estimation of sub-national mortality rates for children
-aged 5-14 for 20 countries in Sub-Saharan Africa. 
+paper. Our paper consists in the estimation of sub-national mortality rates for children
+aged 5-14 for 20 countries in Sub-Saharan Africa, using the method
+developped by Mercer et al. (2015). 
 
 ## Directory structure:
 There should be a single parent directory on your file system,
 where you have to set your R working directory and which will
-be divided into subdirectories named:
+be divided into sub-directories named:
 
 /code  
-&nbsp; /functions  
+&nbsp; &nbsp; /functions  
 /data  
-&nbsp; /fbh  
-&nbsp; /gps cluster  
-&nbsp; /shapefiles  
-&nbsp; /HIV_Adjustments  
-&nbsp; /auxiliary  
-&nbsp; /tidy  
+&nbsp; &nbsp; /fbh  
+&nbsp; &nbsp; /gps cluster  
+&nbsp; &nbsp; /shapefiles  
+&nbsp; &nbsp; /HIV_Adjustments  
+&nbsp; &nbsp; /auxiliary  
+&nbsp; &nbsp; /tidy  
 /richardli_github
 
 The repository available on Github where this README stands is */code*.
-In order to obtain */richardli_github* subdirectory, go [here](https://github.com/richardli/AfricaU5MR),
-download the repo to create the subdirectory as I did above. Within this subdirectory, 
+In order to obtain */richardli_github* sub-directory, go [here](https://github.com/richardli/AfricaU5MR),
+download the repo to create the sub-directory as I did above. Within this sub-directory, 
 cut/copy *HIV_Adjustments* into */data* in order to have the same directory structure as mine. 
 Make sure to exactly reproduce this structure on your laptop before running the R scripts. 
 
 ## Data
 
-The analysis includes 96 [DHS](https://dhsprogram.com/) surveys. Each country has a certain number of DHS 
-surveys (see below). For some countries we needed to select a shapefile in order to relocate cluster 
-within coherent sub-national areas over time. To do so we also needed GPS cluster location of the DHS surveys
-that needed to be re-locate in coherent sub-national areas.
+The analysis includes 96 DHS surveys. Each country has a certain number of DHS 
+surveys (see table below). For each country we needed to select a shapefile which, for some countries, is
+used to relocate cluster  within coherent sub-national areas over time. 
+To do so we also needed GPS cluster location of the DHS surveys that needed to be re-locate in coherent sub-national areas.
 Each DHS survey used in our analysis will be stored in */fbh* for Full-Birth History data. There will be one
 shapefile per country hence, */shapefiles* should include 20 folders. The number of data sets with cluster GPS 
-locations depends on the country and are in */gps cluster*. In each of these three folders, data associated
-to a given DHS surveys will have the name "countryIDYearDHS". Full-Birth history data, shapefile and cluster
-GPS location for Ethiopian 2016 DHS survey will be in *ET2016DHS*.
+locations depends on the country and are in */gps cluster*. 
 
-Below is the list of files you need to download in order to reproduce our analysis (shapefiles can be downloaded  
-[here](http://spatialdata.dhsprogram.com/boundaries/#view=table&countryId=AF)):
+In each of these three sub-directories, data associated
+to a given DHS surveys will have the name "IDcountryYearDHS". Full-Birth history data, shapefile and cluster
+GPS location for Ethiopian 2016 DHS survey will be in *ET2016DHS*. The latter folders contain the unzipped files 
+downloaded from two sources ([DHS FBH with GPS location](https://dhsprogram.com/) and 
+[shapefiles](http://spatialdata.dhsprogram.com/boundaries/#view=table&countryId=AF)).
+
+Below is the table showing the list of files you need to download in order to reproduce our analysis:
 
 | Country       | DHS                                               | Shapefile  | Cluster GPS location              |
 | ------------- |---------------------------------------------------| :---------:| ----------------------------------|                    
@@ -73,7 +77,8 @@ Below is the list of files you need to download in order to reproduce our analys
 |Zambia         | 1992,1996,2002,2007,2014,2018                     | 2002       | 2014,2018                         |
 |Zimbabwe       | 1994,1999,2006,2011,2015                          | 2015       |                                   |
 
-
+For the selectivity assessment shown in the Supporting Information, we also downloaded UN IGME 10q5 estimates 
+[here](https://childmortality.org/) and stored the data set in */data/auxiliary*.
 
 ## R scripts
 
