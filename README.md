@@ -3,6 +3,7 @@
 Benjamin-Samuel Schlüter, Bruno Masquelier, December 2020
 
 Paper under review with PLOS ONE scientific journal
+
 Data section of README has to be finished
 
 ## Purpose:
@@ -37,10 +38,25 @@ Make sure to exactly reproduce this structure on your laptop before running the 
 ## Data
 
 The analysis includes 96 [DHS](https://dhsprogram.com/) surveys. Each country has a certain number of DHS 
-surveys, see the list below. For some countries we needed to select a shapefile in order to relocate cluster 
-within coherent sub-national areas over time. To do so we also needed GPS cluster location of certain DHS surveys.
-Data associated to a given DHS survey is always in *fbh* for Full-Birth History data, one shapefile per country 
-will be present in */shapefiles* and if required some cluster GPS locations data in */gps cluster*. 
+surveys (see below). For some countries we needed to select a shapefile in order to relocate cluster 
+within coherent sub-national areas over time. To do so we also needed GPS cluster location of the DHS surveys
+that needed to be re-locate in coherent sub-national areas.
+Each DHS survey used in our analysis will be stored in */fbh* for Full-Birth History data. There will be one
+shapefile per country hence, */shapefiles* should include 20 folders. The number of data sets with cluster GPS 
+locations depends on the country and are in */gps cluster*. In each of these three folders, data associated
+to a given DHS surveys will have the name "countryIDYearDHS". Full-Birth history data, shapefile and cluster
+GPS location for Ethiopian 2016 DHS survey will be in *ET2016DHS*.
+
+Below is the list of files you need in order to reproduce our analysis (shapefiles can be downloaded  
+[here](http://spatialdata.dhsprogram.com/boundaries/#view=table&countryId=AF)):
+
+| Country       | DHS           | Shapefile  | Cluster GPS location |
+| ------------- |:-------------:| ----------:| --------------------:|                    
+| Benin         | 1996          |            |                      |
+|               | 2001          |     X      |                      | 
+|               | 2006          |            |                      |  
+|               | 2012          |            |                      |
+|               | 2018          |            |                      |
 
 
 ## R scripts
