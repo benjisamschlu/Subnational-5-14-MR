@@ -6,7 +6,7 @@ Paper under review with PLOS ONE scientific journal
 
 
 
-## Purpose:
+## Purpose
 
 This file and all other files in the repository should enable
 you to reproduce our results, plots, tables, ... from our joint
@@ -14,7 +14,7 @@ paper. Our paper consists in the estimation of sub-national mortality rates for 
 aged 5-14 for 20 countries in Sub-Saharan Africa, using the method
 developped by Mercer et al. (2015). 
 
-## Directory structure:
+## Directory structure
 There should be a single parent directory on your file system,
 where you have to set your R working directory and which will
 be divided into sub-directories named:
