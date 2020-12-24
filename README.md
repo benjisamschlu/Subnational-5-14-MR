@@ -18,16 +18,16 @@ There should be a single parent directory on your file system,
 where you have to set your R working directory and which will
 be divided into subdirectories named:
 
-    /code
-        /functions
-    /data
-	/fbh
-	/gps cluster
-	/shapefiles
-	/HIV_Adjustments
-	/auxiliary
-	/tidy
-    /richardli_github
+/code
+    /functions
+/data
+    /fbh
+    /gps cluster
+    /shapefiles
+    /HIV_Adjustments
+    /auxiliary
+    /tidy
+/richardli_github
 
 The repository available on Github where this README stands is */code*.
 In order to obtain */richardli_github* subdirectory, go [here](https://github.com/richardli/AfricaU5MR),
@@ -47,16 +47,19 @@ locations depends on the country and are in */gps cluster*. In each of these thr
 to a given DHS surveys will have the name "countryIDYearDHS". Full-Birth history data, shapefile and cluster
 GPS location for Ethiopian 2016 DHS survey will be in *ET2016DHS*.
 
-Below is the list of files you need in order to reproduce our analysis (shapefiles can be downloaded  
+Below is the list of files you need to download in order to reproduce our analysis (shapefiles can be downloaded  
 [here](http://spatialdata.dhsprogram.com/boundaries/#view=table&countryId=AF)):
 
-| Country       | DHS           | Shapefile  | Cluster GPS location |
-| ------------- |:-------------:| ----------:| --------------------:|                    
-| Benin         | 1996          |            |                      |
-|               | 2001          |     X      |                      | 
-|               | 2006          |            |                      |  
-|               | 2012          |            |                      |
-|               | 2018          |            |                      |
+| Country       | DHS                                               | Shapefile  | Cluster GPS location |
+| ------------- |:-------------------------------------------------:| :---------:| --------------------:|                    
+|Benin          | 1996,2001,2006,2012,2018                          | 2001       |                      |
+|Burkina Faso   | 1993,1999,2003,2010                               | 1999       | 2003,2010            |
+|Cameroon       | 1998,2004,2011,2018                               | 1998       |                      |
+|Ethiopia       | 2000,2005,2011,2016                               | 2016       |                      |
+|Ghana          | 1993,1998,2003,2008,2014                          | 2014       |                      |
+|Guinea         | 1999,2005,2012,2018                               | 1999       | 2005,2012,2018       |
+|Kenya          | 1993,1998,2003,2008,2014                          | 2014       | 2003,2008,2014       |
+
 
 
 ## R scripts
