@@ -4,11 +4,11 @@ Benjamin-Samuel Schlüter, Bruno Masquelier, December 2020
 
 Paper under review with PLOS ONE scientific journal
 
-Data section of README has to be finished
+
 
 ## Purpose:
 
-This file and all the other files in the repository should enable
+This file and all other files in the repository should enable
 you to reproduce our results, plots, tables, ... from our joint
 paper. Our paper consists in the estimation of sub-national mortality rates for children
 aged 5-14 for 20 countries in Sub-Saharan Africa, using the method
@@ -20,14 +20,14 @@ where you have to set your R working directory and which will
 be divided into sub-directories named:
 
 /code  
-&nbsp; &nbsp; /functions  
+&nbsp; &nbsp; &nbsp; &nbsp; /functions  
 /data  
-&nbsp; &nbsp; /fbh  
-&nbsp; &nbsp; /gps cluster  
-&nbsp; &nbsp; /shapefiles  
-&nbsp; &nbsp; /HIV_Adjustments  
-&nbsp; &nbsp; /auxiliary  
-&nbsp; &nbsp; /tidy  
+&nbsp; &nbsp; &nbsp; &nbsp; /fbh  
+&nbsp; &nbsp; &nbsp; &nbsp; /gps cluster  
+&nbsp; &nbsp; &nbsp; &nbsp; /shapefiles  
+&nbsp; &nbsp; &nbsp; &nbsp; /HIV_Adjustments  
+&nbsp; &nbsp; &nbsp; &nbsp; /auxiliary  
+&nbsp; &nbsp; &nbsp; &nbsp; /tidy  
 /richardli_github
 
 The repository available on Github where this README stands is */code*.
@@ -43,12 +43,12 @@ surveys (see table below). For each country we needed to select a shapefile whic
 used to relocate cluster  within coherent sub-national areas over time. 
 To do so we also needed GPS cluster location of the DHS surveys that needed to be re-locate in coherent sub-national areas.
 Each DHS survey used in our analysis will be stored in */fbh* for Full-Birth History data. There will be one
-shapefile per country hence, */shapefiles* should include 20 folders. The number of data sets with cluster GPS 
+shapefile per country hence, */shapefiles* should include 20 folders. The number of data sets containing cluster GPS 
 locations depends on the country and are in */gps cluster*. 
 
 In each of these three sub-directories, data associated
-to a given DHS surveys will have the name "IDcountryYearDHS". Full-Birth history data, shapefile and cluster
-GPS location for Ethiopian 2016 DHS survey will be in *ET2016DHS*. The latter folders contain the unzipped files 
+to a given DHS survey will have the name "IDcountryYearDHS"(i.e Full-Birth history data, shapefile and cluster
+GPS location for Ethiopian 2016 DHS survey will be in *ET2016DHS*). The latter folders contain the unzipped files 
 downloaded from two sources ([DHS FBH with GPS location](https://dhsprogram.com/) and 
 [shapefiles](http://spatialdata.dhsprogram.com/boundaries/#view=table&countryId=AF)).
 
@@ -92,15 +92,21 @@ a .RDS file for each country. Then use *outputs all ctry.R*
 in the paper.
 
 
-If you want to create the output for one country at a time, start with 
-*prepare data.R* and add these two lines of code:
+If you want to create the output for one country at a time, only put one country in the loop.
+An alternative if you do not want to run the loop is to start with 
+*prepare data.R* and add these two lines of code at the beginning of the script:
 
 `ctry <- "country_name"`
 
 `ID <- "country_ID"`
 
 where country_ID should be the ID of the country of interest 
-(i.e `ctry <- "Malawi"` and `ID <- "MW"`).
+(i.e `ctry <- "Malawi"` and `ID <- "MW"`). Then run all *prepare data.R*, 
+followed by *get estimates.R* and finally *store results.R*. Note however that
+*outputs all ctry.R* relies on the fact that you have already stored the output for each country.
+
+
+
 
  
 
