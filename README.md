@@ -19,14 +19,23 @@ where you have to set your R working directory and which will
 be divided into subdirectories named:
 
 /code
+
     /functions
+
 /data
+
     /fbh
+
     /gps cluster
+
     /shapefiles
+
     /HIV_Adjustments
+
     /auxiliary
+
     /tidy
+
 /richardli_github
 
 The repository available on Github where this README stands is */code*.
@@ -51,7 +60,7 @@ Below is the list of files you need to download in order to reproduce our analys
 [here](http://spatialdata.dhsprogram.com/boundaries/#view=table&countryId=AF)):
 
 | Country       | DHS                                               | Shapefile  | Cluster GPS location |
-| ------------- |:-------------------------------------------------:| :---------:| --------------------:|                    
+| ------------- |---------------------------------------------------| :---------:| ---------------------|                    
 |Benin          | 1996,2001,2006,2012,2018                          | 2001       |                      |
 |Burkina Faso   | 1993,1999,2003,2010                               | 1999       | 2003,2010            |
 |Cameroon       | 1998,2004,2011,2018                               | 1998       |                      |
