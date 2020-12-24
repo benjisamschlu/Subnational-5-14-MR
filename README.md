@@ -32,7 +32,7 @@ be divided into sub-directories named:
 
 The repository available on Github where this README stands is */code*.
 In order to obtain */richardli_github* sub-directory, go [here](https://github.com/richardli/AfricaU5MR),
-download the repo to create the sub-directory as I did above. Within this sub-directory, 
+download the repo to create the sub-directory as I did above. Within this downloaded sub-directory, 
 cut/copy *HIV_Adjustments* into */data* in order to have the same directory structure as mine. 
 Make sure to exactly reproduce this structure on your laptop before running the R scripts. 
 
@@ -42,14 +42,15 @@ The analysis includes 96 DHS surveys. Each country has a certain number of DHS
 surveys (see table below). For each country we needed to select a shapefile which, for some countries, is
 used to relocate cluster  within coherent sub-national areas over time. 
 To do so we also needed GPS cluster location of the DHS surveys that needed to be re-locate in coherent sub-national areas.
-Each DHS survey used in our analysis will be stored in */fbh* for Full-Birth History data. There will be one
+Each DHS survey used in our analysis will be stored in */fbh* for Full-Birth History data (96 folders). There will be one
 shapefile per country hence, */shapefiles* should include 20 folders. The number of data sets containing cluster GPS 
-locations depends on the country and are in */gps cluster*. 
+locations depends on the country and are in */gps cluster* (32 folders). 
 
-In each of these three sub-directories, data associated
-to a given DHS survey will have the name "IDcountryYearDHS"(i.e Full-Birth history data, shapefile and cluster
-GPS location for Ethiopian 2016 DHS survey will be in *ET2016DHS*). The latter folders contain the unzipped files 
-downloaded from two sources ([DHS FBH with GPS location](https://dhsprogram.com/) and 
+In each of these three sub-directories, unzipped downloaded data for a given DHS survey will be stored in a folder named 
+"IDcountryYearDHS"(i.e Full-Birth history data, shapefile and cluster
+GPS location for Ethiopian 2016 DHS survey will be in *ET2016DHS*. Hence, in our example, the folder *ET2016DHS* 
+will appear three times, one time in each of the three sub-directories). Unzipped files 
+downloaded come from two sources ([DHS FBH with GPS location](https://dhsprogram.com/) and 
 [shapefiles](http://spatialdata.dhsprogram.com/boundaries/#view=table&countryId=AF)).
 
 Below is the table showing the list of files you need to download in order to reproduce our analysis:
@@ -93,7 +94,8 @@ in the paper.
 
 
 If you want to create the output for one country at a time, only put one country in the loop.
-An alternative if you do not want to run the loop is to start with 
+
+An alternative, if you do not want to run the loop, is to start with 
 *prepare data.R* and add these two lines of code at the beginning of the script:
 
 `ctry <- "country_name"`
@@ -101,7 +103,7 @@ An alternative if you do not want to run the loop is to start with
 `ID <- "country_ID"`
 
 where country_ID should be the ID of the country of interest 
-(i.e `ctry <- "Malawi"` and `ID <- "MW"`). Then run all *prepare data.R*, 
+(i.e `ctry <- "Malawi"` and `ID <- "MW"`). Then run *prepare data.R*, 
 followed by *get estimates.R* and finally *store results.R*. Note however that
 *outputs all ctry.R* relies on the fact that you have already stored the output for each country.
 
