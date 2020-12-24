@@ -18,24 +18,15 @@ There should be a single parent directory on your file system,
 where you have to set your R working directory and which will
 be divided into subdirectories named:
 
-/code
-
-    /functions
-
-/data
-
-    /fbh
-
-    /gps cluster
-
-    /shapefiles
-
-    /HIV_Adjustments
-
-    /auxiliary
-
-    /tidy
-
+/code  
+    /functions  
+/data  
+    /fbh  
+    /gps cluster  
+    /shapefiles  
+    /HIV_Adjustments  
+    /auxiliary  
+    /tidy  
 /richardli_github
 
 The repository available on Github where this README stands is */code*.
@@ -59,15 +50,28 @@ GPS location for Ethiopian 2016 DHS survey will be in *ET2016DHS*.
 Below is the list of files you need to download in order to reproduce our analysis (shapefiles can be downloaded  
 [here](http://spatialdata.dhsprogram.com/boundaries/#view=table&countryId=AF)):
 
-| Country       | DHS                                               | Shapefile  | Cluster GPS location |
-| ------------- |---------------------------------------------------| :---------:| ---------------------|                    
-|Benin          | 1996,2001,2006,2012,2018                          | 2001       |                      |
-|Burkina Faso   | 1993,1999,2003,2010                               | 1999       | 2003,2010            |
-|Cameroon       | 1998,2004,2011,2018                               | 1998       |                      |
-|Ethiopia       | 2000,2005,2011,2016                               | 2016       |                      |
-|Ghana          | 1993,1998,2003,2008,2014                          | 2014       |                      |
-|Guinea         | 1999,2005,2012,2018                               | 1999       | 2005,2012,2018       |
-|Kenya          | 1993,1998,2003,2008,2014                          | 2014       | 2003,2008,2014       |
+| Country       | DHS                                               | Shapefile  | Cluster GPS location              |
+| ------------- |---------------------------------------------------| :---------:| ----------------------------------|                    
+|Benin          | 1996,2001,2006,2012,2018                          | 2001       |                                   |
+|Burkina Faso   | 1993,1999,2003,2010                               | 1999       | 2003,2010                         |
+|Cameroon       | 1998,2004,2011,2018                               | 1998       |                                   |
+|Ethiopia       | 2000,2005,2011,2016                               | 2016       |                                   |
+|Ghana          | 1993,1998,2003,2008,2014                          | 2014       |                                   |
+|Guinea         | 1999,2005,2012,2018                               | 1999       | 2005,2012,2018                    |
+|Kenya          | 1993,1998,2003,2008,2014                          | 2014       | 2003,2008,2014                    |
+|Lesotho        | 2004,2009,2014                                    | 2014       |                                   |
+|Madagascar     | 1992,1997,2004,2009                               | 2004       | 2009                              |
+|Mali           | 1996,2001,2006,2013,2018                          | 1996       | 1996,2001,2006,2013, 2018         |
+|Malawi         | 1992,2000,2004,2010,2016                          | 2016       |                                   |
+|Nigeria        | 1990,2003,2008,2013,2018                          | 2018       | 1990                              |
+|Niger          | 1992,1998,2006,2012                               | 1998       |                                   |
+|Namibia        | 2000,2007,2013                                    | 2013       |                                   |
+|Rwanda         | 2005,2008,2010,2015                               | 2015       |                                   |
+|Senegal        | 93,97,2005,2011,2013,2014,2015,2016,2017,2018,2019| 2017       | All selected DHS except 2017,2018 |
+|Tanzania       | 1996,1999,2005,2010,2016                          | 1996       | 1999,2010,2016                    |
+|Uganda         | 1995,2001,2006,2011,2016                          | 1995       | 2006,2011,2016                    |
+|Zambia         | 1992,1996,2002,2007,2014,2018                     | 2002       | 2014,2018                         |
+|Zimbabwe       | 1994,1999,2006,2011,2015                          | 2015       |                                   |
 
 
 
