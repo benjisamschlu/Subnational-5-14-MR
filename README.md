@@ -19,14 +19,14 @@ where you have to set your R working directory and which will
 be divided into subdirectories named:
 
 /code  
-    /functions  
+&nbsp; /functions  
 /data  
-    /fbh  
-    /gps cluster  
-    /shapefiles  
-    /HIV_Adjustments  
-    /auxiliary  
-    /tidy  
+&nbsp; /fbh  
+&nbsp; /gps cluster  
+&nbsp; /shapefiles  
+&nbsp; /HIV_Adjustments  
+&nbsp; /auxiliary  
+&nbsp; /tidy  
 /richardli_github
 
 The repository available on Github where this README stands is */code*.
@@ -67,7 +67,7 @@ Below is the list of files you need to download in order to reproduce our analys
 |Niger          | 1992,1998,2006,2012                               | 1998       |                                   |
 |Namibia        | 2000,2007,2013                                    | 2013       |                                   |
 |Rwanda         | 2005,2008,2010,2015                               | 2015       |                                   |
-|Senegal        | 93,97,2005,2011,2013,2014,2015,2016,2017,2018,2019| 2017       | All selected DHS except 2017,2018 |
+|Senegal        | 1993,1997,2005,2011,2013,2014,2015,2016,2017,2018,2019| 2017       | All selected DHS except 2017,2018 |
 |Tanzania       | 1996,1999,2005,2010,2016                          | 1996       | 1999,2010,2016                    |
 |Uganda         | 1995,2001,2006,2011,2016                          | 1995       | 2006,2011,2016                    |
 |Zambia         | 1992,1996,2002,2007,2014,2018                     | 2002       | 2014,2018                         |
