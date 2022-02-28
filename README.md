@@ -2,7 +2,7 @@
 
 Benjamin-Samuel Schlüter, Bruno Masquelier, December 2020
 
-Paper under review with PLOS ONE scientific journal
+Paper published in PLOS ONE scientific journal [link](https://pubmed.ncbi.nlm.nih.gov/33465127/)
 
 
 
